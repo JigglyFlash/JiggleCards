@@ -4,7 +4,13 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
+
+app.get('/', (req, res) => {
+  res.sendStatus(200)
+})
+
+
 
 app.use((req, res) => res.status(404).send('Page Not Found'));
 
