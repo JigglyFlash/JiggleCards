@@ -1,5 +1,6 @@
 const express = require('express');
 
+const userController = require('./controller/userController')
 const app = express();
 const PORT = 3000;
 
@@ -9,7 +10,9 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.sendStatus(200)
 })
-
+app.post('/signup', userController.createUser, (req, res) => {
+  res.status(200).redirect("/secret");
+});
 
 
 app.use((req, res) => res.status(404).send('Page Not Found'));

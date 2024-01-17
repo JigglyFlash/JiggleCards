@@ -1,0 +1,5 @@
+CREATE DATABASE flashcards
+
+CREATE TABLE cards{
+  cards_id SERIAL PRIMARY KEY
+}
