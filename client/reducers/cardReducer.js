@@ -44,3 +44,6 @@ const cardSlice = createSlice({
     },
   },
 });
+
+export const { syncCards, addCard, deleteCard } = cardSlice.actions;
+export default cardSlice.reducer;

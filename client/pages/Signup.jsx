@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { syncUser } from '../reducers/userReducer';
 
-const loginPage = () => {
-  const dispatch = useDispatch();
+const signUpPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async () => {
     const data = {};
     data.username = document.getElementById('username').value;
     data.password = document.getElementById('password').value;
 
-    // fetch request to back end for user info verification
+    // fetch request to back end to store user data in database
     // boilerplate borrowed from other project - will need to modify to match back end
     const response = await fetch('/users', {
       method: 'POST',
@@ -28,16 +28,16 @@ const loginPage = () => {
 
     dispatch(syncUser(result)); // may need to deconstruct result before dispatching it to the store
 
-    // if login attempt is unsuccessful, route to /signup page
-    // if successful, route to main /display page
-    if (result === 'username not found') return navigate('/signup');
-    if (result === 'ok') return navigate('/display');
+    // if result from backend is good (200) then navigate to display page
+    // if request fails to add user to database, do something else?
+    if (result === 'you good homie') return navigate('/display');
+    if (result === 'it no work') return navigate('/');
   };
 
   return (
     <div className="flex justify-center items-center h-screen bg-green-700">
       <div className="w-full max-w-xs">
-        <h1 className="text-3xl text-white mb-6 text-center">Login</h1>
+        <h1 className="text-3xl text-white mb-6 text-center">Sign Up</h1>
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label
@@ -71,10 +71,10 @@ const loginPage = () => {
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
-              id="login-button"
+              id="signup-button"
               onClick={handleSubmit}
             >
-              LOG IN
+              Submit
             </button>
           </div>
         </div>
@@ -83,4 +83,4 @@ const loginPage = () => {
   );
 };
 
-export default loginPage;
+export default signUpPage;
