@@ -1,17 +1,17 @@
 const express = require("express");
-
-const userController = require('./controller/userController')
+const userController = require('./controllers/userController')
+const cardController = require('./controllers/cardController')
+const router = require('./router')
 const app = express();
 const PORT = 3000;
+const cookieParser = require("cookie-parser");
 
 app.use(express.json());
+app.use(cookieParser());
 //for html form submit
 app.use(express.urlencoded({ extended: true }));
+app.use('/', router);
 
-app.get("/", (req, res) => {
-  res.sendStatus(200);
-});
-app.post();
 app.use((req, res) => res.status(404).send("Page Not Found"));
 
 app.use((err, req, res, next) => {
