@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import reducers from './index.js'
+import reducers from './reducers/index.js';
 
 const store = configureStore({
-    reducer: reducers,
+  reducer: reducers,
 });
 
 export default store;
+
+// useSelector((store) => store.deck.decks)  --> should return array of decks in store??

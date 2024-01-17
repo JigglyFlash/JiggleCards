@@ -21,7 +21,7 @@ const currDeckSlice = createSlice({
 
 // deck = {
 //     id: ___,
-//     name_of_deck: ___,
+//     title: ___,
 //     cards: []
 // }
 

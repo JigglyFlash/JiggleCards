@@ -12,6 +12,5 @@ const reducers = combineReducers({
   user: userReducer,
   card: cardReducer,
 });
-
 // make the combined reducers available for import
 export default reducers;
