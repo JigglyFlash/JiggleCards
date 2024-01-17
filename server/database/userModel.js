@@ -1,11 +1,13 @@
 const { Pool } = require("pg");
 
 const PG_URI =
-  "postgres://tjvfrije:HvbPqmC0RtHg9DPG9te3zzHb05F9FKOC@arjuna.db.elephantsql.com/tjvfrije";
+  "postgres://ktafuabn:5vIl3msl7tOtM4UDyI8tgSSNCXtMNQyM@berry.db.elephantsql.com/ktafuabn";
 
+const PG_URI2 = 
+  "postgres://tjvfrije:HvbPqmC0RtHg9DPG9te3zzHb05F9FKOC@arjuna.db.elephantsql.com/tjvfrije"
 // create a new pool here using the connection string above
 const pool = new Pool({
-  connectionString: PG_URI,
+  connectionString: PG_URI2
 });
 
 // We export an object that contains a property called query,
@@ -15,5 +17,6 @@ module.exports = {
   query: (text, params, callback) => {
     console.log("executed query", text);
     return pool.query(text, params, callback);
-  },
+  }, 
+  pool
 };

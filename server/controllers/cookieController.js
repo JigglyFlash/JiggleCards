@@ -8,8 +8,10 @@ function getRandomInt(max){
 
 cookieController.setCookie = async(req , res, next) => {
     try {
-        const { user_id } = res.locals.user;
-        res.cookie('user_id', user_id, {expires: new Date(Date.now() + 3600000), httpOnly:true})
+        const { user_id } = res.locals.userID;
+        const { username } = res.locals.userName;
+        res.cookie('user_id', user_id);
+        res.cookie('userName', username);
         return next()
     }catch (error) {
         return next({
@@ -22,7 +24,16 @@ cookieController.setCookie = async(req , res, next) => {
 
 cookieController.verifyCookie = async(req , res, next) => {
     try {
-        
+        if (!req.cookies.user_id || !req.cookies.userName) {
+            console.log('req.cookies:', req.cookies);
+            return next({
+                log: "Express error handler caught in userController.verifycookie",
+                status: 400,
+                message: { err: "Missing cookies" },
+              })
+        }else{
+            return next()
+        }
     }catch (error) {
         return next({
             log:`cookieController.verifyCookie: ${error}`,
@@ -31,3 +42,4 @@ cookieController.verifyCookie = async(req , res, next) => {
         });
     }
 }
+module.exports = cookieController;
