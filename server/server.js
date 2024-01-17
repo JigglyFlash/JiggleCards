@@ -1,27 +1,24 @@
-const express = require('express');
+const express = require("express");
 
 const userController = require('./controller/userController')
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+//for html form submit
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.sendStatus(200)
-})
-app.post('/signup', userController.createUser, (req, res) => {
-  res.status(200).redirect("/secret");
+app.get("/", (req, res) => {
+  res.sendStatus(200);
 });
-
-
-app.use((req, res) => res.status(404).send('Page Not Found'));
+app.post();
+app.use((req, res) => res.status(404).send("Page Not Found"));
 
 app.use((err, req, res, next) => {
   const defaultErr = {
-    log: 'Express error handler caught unknown middleware error',
+    log: "Express error handler caught unknown middleware error",
     status: 500,
-    message: { err: 'An error occurred' },
+    message: { err: "An error occurred" },
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);
