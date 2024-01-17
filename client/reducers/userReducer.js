@@ -25,15 +25,19 @@ const userSlice = createSlice({
       state.userId = userId;
     },
     addDeck: (state, action) => {
-      console.log('action.payload from addDeck method: ', action.payload);
       const newDeck = action.payload;
-      // const decksCopy = [...state.decks];
-      state.decks.push(newDeck);
-      console.log('decksCopy in userReducer: ', decksCopy);
+      const decksCopy = [...state.decks];
+      decksCopy.push(newDeck);
+
       // set new properties to state
       state.decks = decksCopy;
     },
+    setActiveDeck: (state, action) => {
+      // action.payload will be the title of the deck selected
+      const { title } = action.payload;
+      state.activeDeck = title;
+    },
   },
 });
-export const { syncUser, addDeck } = userSlice.actions;
+export const { syncUser, addDeck, setActiveDeck } = userSlice.actions;
 export default userSlice.reducer;

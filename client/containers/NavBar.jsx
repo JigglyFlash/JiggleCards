@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Modal from '../components/Modal.jsx';
+import DeckModal from '../components/DeckModal.jsx';
 
 const NavBar = () => {
   const activeDeck = useSelector((store) => store.user.activeDeck);
@@ -15,20 +15,23 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar flex justify-around items-center">
+    <div className="navbar flex justify-around items-center bg-blue-500 text-white py-4 shadow-md">
       <div className="nav-left">
-        <button className="add-deck-button" onClick={openModal}>
+        <button
+          className="add-deck-button bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+          onClick={openModal}
+        >
           ADD DECK
         </button>
       </div>
       <div className="nav-mid">
-        <div className="current-deck">Current Deck: {activeDeck.title}</div>
+        <div className="current-deck font-semibold">Current Deck: {activeDeck.title}</div>
       </div>
       <div className="nav-right">
-        <div className="username">Hello, {username}</div>
+        <div className="username font-semibold">Hello, {username}</div>
       </div>
 
-      {modalIsOpen ? <Modal openModal={openModal} /> : null}
+      {modalIsOpen ? <DeckModal openModal={openModal} /> : null}
     </div>
   );
 };

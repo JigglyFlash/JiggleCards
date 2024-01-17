@@ -3,18 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   decks: [], // initialized to an empty array --> to be filled with deck objects later
-  name: '',
-  id: '',
 };
 
 const currDeckSlice = createSlice({
   name: 'currDeck',
   initialState,
-  reducer: {
+  reducers: {
     syncDeck: (state, action) => {
       state.decks = action.payload.decks;
-      state.name = action.payload.name;
-      state.id = action.payload.id;
     },
   },
 });
