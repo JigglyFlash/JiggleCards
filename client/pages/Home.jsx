@@ -18,17 +18,29 @@ const homePage = () => {
   };
 
   return (
-    <div className="homePage">
-      <div className="buttons justify-around flex">
-        <button className="login" onClick={loginSubmit}>
-          LOG IN
-        </button>
-        <button className="signup" onClick={signupSubmit}>
-          SIGN UP
-        </button>
-        <button className="start" onClick={startSubmit}>
-          CONTINUE AS GUEST
-        </button>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="text-center">
+        <h1 className="text-4xl text-gray-800 font-bold mb-10">Welcome to JiggleCards</h1>
+        <div className="space-x-4">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+            onClick={loginSubmit}
+          >
+            LOG IN
+          </button>
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+            onClick={signupSubmit}
+          >
+            SIGN UP
+          </button>
+          <button
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+            onClick={startSubmit}
+          >
+            CONTINUE AS GUEST
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -20,14 +20,15 @@ const MainContainer = () => {
   }, []);
 
   return (
-    <div className="main-container">
-      <div className="navbar">
+    <div className="main-container bg-gray-50 min-h-screen">
+      <div className="navbar bg-white shadow-md">
         <NavBar />
       </div>
-      <div>
+      <div className="py-8">
         <DecksComponent />
       </div>
-      {/* <div className="card-container">
+      {/* Uncomment the following section if you wish to include the card container */}
+      {/* <div className="card-container py-8">
         <CardsComponent />
       </div> */}
     </div>
