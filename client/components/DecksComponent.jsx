@@ -24,7 +24,7 @@ const DecksComponent = () => {
     decks.forEach((deck) => {
       if (deck.title === activeDeck) {
         for (let i = 0; i < deck.cards.length; i++) {
-          const card = <Deck deckTitle={card.title} key={i} />;
+          const card = <Deck deckTitle={card[i].title} key={i} />;
           displayArray.push(card);
         }
       }
