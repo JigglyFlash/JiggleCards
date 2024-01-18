@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addDeck, addCard } from '../reducers/userReducer.js';
 
 const addCardModal = ({ openCardModal }) => {
+  const activeDeck = useSelector((store) => store.user.activeDeck);
   const dispatch = useDispatch();
   const submitCard = () => {
     const card = {};
     card.title = document.getElementById('card-title').value;
     // card.userId = userId;
-    card.cards = [];
-
-    dispatch();
+    card.deck = activeDeck;
+    //
+    dispatch(addCard(card));
     openCardModal();
   };
 
