@@ -38,7 +38,17 @@ const userSlice = createSlice({
       const title = action.payload;
       state.activeDeck = title;
     },
+    addCard: (state, action) => {
+      const { title, deck } = action.payload;
+      const decksArray = [...state.decks];
+      decksArray.forEach((el) => {
+        if (el.title === deck) {
+          el.cards.push(title);
+        }
+      });
+      state.decks = decksArray;
+    },
   },
 });
-export const { syncUser, addDeck, setActiveDeck } = userSlice.actions;
+export const { syncUser, addDeck, setActiveDeck, addCard } = userSlice.actions;
 export default userSlice.reducer;
