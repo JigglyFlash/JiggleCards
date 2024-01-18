@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
-    src: './client/index.js',
+    src: './client/index.jsx',
   },
   output: {
     filename: 'bundle.js',
@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         test: /\.css/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
