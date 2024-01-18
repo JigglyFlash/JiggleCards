@@ -14,24 +14,25 @@ const loginPage = () => {
 
     // fetch request to back end for user info verification
     // boilerplate borrowed from other project - will need to modify to match back end
-    const response = await fetch('/users', {
+    const response = await fetch('/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
-    const result = await response.json();
-
+    const result = await response;
+    console.log(result);
     // once response comes from back with a successful login, invoke the syncUser to get user data
     // stored into state. DATA FORMAT WILL MATTER (need to link the reducer method to actual form of response)
 
-    dispatch(syncUser(result)); // may need to deconstruct result before dispatching it to the store
+    dispatch(syncUser({ ...result })); // may need to deconstruct result before dispatching it to the store
 
     // if login attempt is unsuccessful, route to /signup page
     // if successful, route to main /display page
     if (result === 'username not found') return navigate('/signup');
     if (result === 'ok') return navigate('/display');
+    return navigate('/display');
   };
 
   return (

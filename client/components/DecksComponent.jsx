@@ -1,25 +1,37 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Deck from './Deck.jsx';
+import Card from './Card.jsx';
 
 const DecksComponent = () => {
   // pull the decks from the user store --> do we even need a deckReducer??
   const decks = useSelector((store) => store.user.decks); // if guest, will return empty array
-  console.log('decks coming from store: ', decks);
+  const activeDeck = useSelector((store) => store.user.activeDeck);
+
+  // console.log('decks coming from store: ', decks);
+
+  // top line conditional to check if activeDeck exists
+  // if (activeDeck) then render the cards in that deck
+  // if (!activeDeck) then render the decks pulled from the store
 
   const displayArray = [];
-  if (decks[0] != undefined) {
+  if (!activeDeck) {
     for (let i = 0; i < decks.length; i++) {
-      const deck = <Deck deckTitle={decks[i].title} />;
+      const deck = <Deck deckTitle={decks[i].title} key={i} />;
       displayArray.push(deck);
     }
+  } else {
+    decks.forEach((deck) => {
+      if (deck.title === activeDeck) {
+        for (let i = 0; i < deck.cards.length; i++) {
+          const card = <Deck deckTitle={card[i].title} key={i} />;
+          displayArray.push(card);
+        }
+      }
+    });
   }
-  const [modalIsOpen, changeModal] = useState(false);
-  const openModal = () => {
-    changeModal(!modalIsOpen);
-  };
 
-  return <div className="deck">{displayArray}</div>;
+  return <div className="deck flex">{displayArray}</div>;
 
   // if (currentDeck) exists: loop through cards in that deck
 
