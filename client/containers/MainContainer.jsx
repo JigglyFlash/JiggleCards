@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { syncDeck } from '../reducers/deckReducer.js';
 import NavBar from './NavBar.jsx';
-import CardsComponent from '../components/CardsComponent.jsx';
 import DecksComponent from '../components/DecksComponent.jsx';
 
 const MainContainer = () => {

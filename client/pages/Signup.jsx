@@ -14,24 +14,27 @@ const signUpPage = () => {
 
     // fetch request to back end to store user data in database
     // boilerplate borrowed from other project - will need to modify to match back end
-    const response = await fetch('/user/signup', {
+    //console.log(JSON.stringify(data));
+    const response = await fetch('/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
-    const result = await response.json();
+    const result = await response;
+    console.log(result);
 
     // once response comes from back with a successful login, invoke the syncUser to get user data
     // stored into state. DATA FORMAT WILL MATTER (need to link the reducer method to actual form of response)
 
-    dispatch(syncUser(result)); // may need to deconstruct result before dispatching it to the store
+    dispatch(syncUser(data)); // may need to deconstruct result before dispatching it to the store
 
     // if result from backend is good (200) then navigate to display page
     // if request fails to add user to database, do something else?
-    if (result === 'you good homie') return navigate('/display');
-    if (result === 'it no work') return navigate('/');
+    // if (result === 'you good homie') return navigate('/display');
+    // if (result === 'it no work') return navigate('/');
+    return navigate('/display');
   };
 
   return (

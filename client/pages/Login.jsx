@@ -21,17 +21,18 @@ const loginPage = () => {
       },
       body: JSON.stringify(data),
     });
-    const result = await response.json();
-
+    const result = await response;
+    console.log(result);
     // once response comes from back with a successful login, invoke the syncUser to get user data
     // stored into state. DATA FORMAT WILL MATTER (need to link the reducer method to actual form of response)
 
-    dispatch(syncUser(result)); // may need to deconstruct result before dispatching it to the store
+    dispatch(syncUser({ ...result })); // may need to deconstruct result before dispatching it to the store
 
     // if login attempt is unsuccessful, route to /signup page
     // if successful, route to main /display page
     if (result === 'username not found') return navigate('/signup');
     if (result === 'ok') return navigate('/display');
+    return navigate('/display');
   };
 
   return (
