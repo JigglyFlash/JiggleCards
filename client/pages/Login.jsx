@@ -28,11 +28,13 @@ const loginPage = () => {
 
     dispatch(syncUser({ ...result })); // may need to deconstruct result before dispatching it to the store
 
-    // if login attempt is unsuccessful, route to /signup page
-    // if successful, route to main /display page
-    if (result === 'username not found') return navigate('/signup');
-    if (result === 'ok') return navigate('/display');
-    return navigate('/display');
+    // if login attempt is unsuccessful(result.ok = false), route to /signup page
+    // if successful(result.ok = true), route to main /display page
+    if (result.ok) {
+      return navigate('/display');
+    } else {
+      return navigate('/signup');
+    }
   };
 
   return (

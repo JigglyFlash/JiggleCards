@@ -8,12 +8,38 @@ const cookieParser = require('cookie-parser');
 
 app.use(express.json());
 app.use(cookieParser());
-app.use('/', router);
 //for html form submit
 app.use(express.urlencoded({ extended: true }));
 
-app.use((req, res) => res.status(404).send('Page Not Found'));
-
+app.get(
+  '/',
+  (req, res) => res.sendFile(path.resolve(__dirname, '../client/index.html')),
+  function (err) {
+    if (err) {
+      console.error('Error sending file:', err);
+      res.status(500).send('Server Error');
+    }
+  },
+);
+app.get('/display', (req, res) =>
+  res.sendFile(path.resolve(__dirname, '../client/index.html'), function (err) {
+    if (err) {
+      console.log('Error sending file:', err);
+      res.status(500).send('Server Error');
+    }
+  }),
+);
+app.use('/', router);
+// app.use((req, res) => res.sendStatus(404));
+// Catch-all handler for any other GET request
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/index.html'), function (err) {
+    if (err) {
+      console.log('Error sending file:', err);
+      res.status(500).send('Server Error');
+    }
+  });
+});
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',

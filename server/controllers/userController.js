@@ -3,20 +3,21 @@ const bcrypt = require('bcrypt');
 
 const userController = {
   verifyUser: async (req, res, next) => {
-    console.log('inside userController.verifyUser');
+    // console.log('inside userController.verifyUser');
     try {
       const { username, password } = req.body;
       const userQuery = 'SELECT * FROM users WHERE username = $1';
-      // const findUserID = await pool.query('SELECT * FROM users WHERE username = $1');
       const userResult = await pool.query(userQuery, [username]);
-      console.log('userResult: ', userResult.rows[0].id);
-      const userID = userResult.rows[0].id;
-      //pass down to next middleware functionto get user's deck.
-      res.locals.userID = userID;
+      // console.log('userResult: ', userResult.rows[0].id);
+      //pass down to setcookie
       res.locals.userName = username;
+      //if user not found in database
       if (userResult.rows.length === 0) {
-        console.log('user not found');
-        return res.redirect('/signup');
+        return next({
+          log: 'userController.verifyUser: Error: User not found',
+          status: 400,
+          message: { err: 'user not found' },
+        });
       }
       // User exist
       const user = userResult.rows[0];
@@ -26,7 +27,6 @@ const userController = {
         return res.redirect('/signup');
       } else {
         console.log('Login successfully');
-        return res.redirect('/home');
         return next();
       }
     } catch (err) {
@@ -39,6 +39,7 @@ const userController = {
   },
   // Create a new user
   createUser: async (req, res, next) => {
+    console.log('inside userController.createUser');
     const { username, password } = req.body;
     const salt = await bcrypt.genSalt();
     const hashedPW = await bcrypt.hash(password, salt);
@@ -58,14 +59,15 @@ const userController = {
   },
   updatePW: async (req, res, next) => {
     try {
+      console.log('inside userController.updatePW');
       const { username, password } = req.body;
       const salt = await bcrypt.genSalt();
       const hashedPW = await bcrypt.hash(password, salt);
-      const queryText = "UPDATE users SET password = '$1' WHERE username = $2 ";
-      const response = await pool.query(queryText, [username, hashedPW]);
+      const queryText = 'UPDATE users SET password = $1 WHERE username = $2';
+      const response = await pool.query(queryText, [hashedPW, username]);
       console.log('response for update user password', response);
       return next();
-    } catch (error) {
+    } catch (err) {
       return next({
         log: `Express error handler caught in userController.updatePW: ${err}`,
         status: 400,
@@ -95,8 +97,12 @@ const userController = {
   getDeck: async (req, res) => {
     console.log('inside cookieController.getDeck');
     try {
-      const userID = req.cookies.user_id;
-      const userName = req.cookies.username;
+      // const userID = req.cookies.user_id;
+      // const userName = res.cookies.username;
+      console.log('cookie', res.cookie);
+      4;
+      // console.log('userid', userID);
+      // console.log('userName', userName);
       const allDecks = await pool.query(`SELECT * FROM deck WHERE user_id=${userID}`);
       console.log('req.cookie', req.cookies);
       res.json(allDecks.rows);
