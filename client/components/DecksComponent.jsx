@@ -31,7 +31,7 @@ const DecksComponent = () => {
     });
   }
 
-  return <div className="deck flex">{displayArray}</div>;
+  return <div className="deck flex flex-wrap">{displayArray}</div>;
 
   // if (currentDeck) exists: loop through cards in that deck
 

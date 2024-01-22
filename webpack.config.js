@@ -8,6 +8,7 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
+    publicPath: '/',
     path: path.resolve(__dirname, 'build'),
   },
   module: {
@@ -37,12 +38,13 @@ module.exports = {
     }),
   ],
   devServer: {
+    hot: true,
     static: {
       publicPath: '/build',
       directory: path.resolve(__dirname, 'build'),
     },
     proxy: {
-      '/': 'http://localhost:3000',
+      '/': 'http://localhost:3000/',
     },
     historyApiFallback: true,
   },

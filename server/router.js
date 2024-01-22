@@ -31,5 +31,5 @@ router.post('/home', cookieController.verifyCookie, userController.postDeck, (re
 router.get('/home', userController.getDeck, (req, res) => res.sendStatus(200));
 
 router.post('/home/card', cardController.postCard, (req, res) => res.sendStatus(200));
-router.get('/home/card', cardController.getCard, (req, res) => res.sendStatus(200));
+router.get('/home/card', cardController.getCards, (req, res) => res.sendStatus(200));
 module.exports = router;

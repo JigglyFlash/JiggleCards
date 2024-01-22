@@ -2,11 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const CardsComponent = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div></div>;
+};
 
-export default CardsComponent
+export default CardsComponent;
