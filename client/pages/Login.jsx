@@ -14,7 +14,7 @@ const loginPage = () => {
 
     // fetch request to back end for user info verification
     // boilerplate borrowed from other project - will need to modify to match back end
-    const response = await fetch('/login', {
+    const response = await fetch('/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,11 +28,13 @@ const loginPage = () => {
 
     dispatch(syncUser({ ...result })); // may need to deconstruct result before dispatching it to the store
 
-    // if login attempt is unsuccessful, route to /signup page
-    // if successful, route to main /display page
-    if (result === 'username not found') return navigate('/signup');
-    if (result === 'ok') return navigate('/display');
-    return navigate('/display');
+    // if login attempt is unsuccessful(result.ok = false), route to /signup page
+    // if successful(result.ok = true), route to main /display page
+    if (result.ok) {
+      return navigate('/display');
+    } else {
+      return navigate('/signup');
+    }
   };
 
   return (

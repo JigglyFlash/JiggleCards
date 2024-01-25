@@ -37,13 +37,17 @@ module.exports = {
     }),
   ],
   devServer: {
+    host: 'localhost',
+    port: 8080,
+    historyApiFallback: true,
+    hot: true,
     static: {
       publicPath: '/build',
       directory: path.resolve(__dirname, 'build'),
     },
+    headers: { 'Access-Control-Allow-Origin': '*' },
     proxy: {
-      '/': 'http://localhost:3000',
+      '/api': { target: 'http://localhost:3000/', secure: false },
     },
-    historyApiFallback: true,
   },
 };

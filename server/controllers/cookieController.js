@@ -8,14 +8,12 @@ function getRandomInt(max) {
 cookieController.setCookie = async (req, res, next) => {
   console.log('inside cookieController.setCookie');
   try {
-    const { user_id } = res.locals.userID;
-    const { username } = res.locals.userName;
-    res.cookie('user_id', user_id);
-    res.cookie('userName', username);
+    res.cookie('userName', res.locals.userName, { httpOnly: true });
+    res.cookie('user_id', getRandomInt(99), { httpOnly: true });
     return next();
   } catch (error) {
     return next({
-      log: `cookieController.createCookie: ${error}`,
+      log: `cookieController.setCookie: ${error}`,
       message: { err: 'error in creating cookie' },
       status: 400,
     });
