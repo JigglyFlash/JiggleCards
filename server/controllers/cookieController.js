@@ -6,7 +6,7 @@ function getRandomInt(max) {
 }
 
 cookieController.setCookie = async (req, res, next) => {
-  // console.log('inside cookieController.setCookie');
+  console.log('inside cookieController.setCookie');
   try {
     res.cookie('userName', res.locals.userName, { httpOnly: true });
     res.cookie('user_id', getRandomInt(99), { httpOnly: true });

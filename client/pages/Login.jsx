@@ -14,7 +14,7 @@ const loginPage = () => {
 
     // fetch request to back end for user info verification
     // boilerplate borrowed from other project - will need to modify to match back end
-    const response = await fetch('/login', {
+    const response = await fetch('/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

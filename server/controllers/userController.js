@@ -24,7 +24,11 @@ const userController = {
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch) {
         console.log('password incorrect, redirect to signup');
-        return res.redirect('/signup');
+        return next({
+          log: 'userController.verifyUser: Error: password incorrect',
+          status: 400,
+          message: { err: 'Password incorrect' },
+        });
       } else {
         console.log('Login successfully');
         return next();
