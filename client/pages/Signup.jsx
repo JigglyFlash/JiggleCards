@@ -15,7 +15,7 @@ const signUpPage = () => {
     // fetch request to back end to store user data in database
     // boilerplate borrowed from other project - will need to modify to match back end
     //console.log(JSON.stringify(data));
-    const response = await fetch('/signup', {
+    const response = await fetch('/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
